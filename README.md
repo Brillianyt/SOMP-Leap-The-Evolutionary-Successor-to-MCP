@@ -1,4 +1,4 @@
-# 🌐 SOMP-Market: The Agent Unified Market
+# 🌐 SOMP: The Agent Unified Market
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Protocol: SOMP 1.0](https://img.shields.io/badge/Protocol-SOMP--1.0-blueviolet)](#)
@@ -57,4 +57,5 @@ SOMP 采用 `JSON{Universal + Specific}` 结构，兼顾生态的“广度”与
 
 ### 运行准入能力检测 (CLI)
 ```bash
+
 python somp_exam.py --model "deepseek-v3" --test-suite "logic-95"
