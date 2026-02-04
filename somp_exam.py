@@ -171,35 +171,28 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def run_exam(
-    model: str,
-    test_suite: str,
-    outputs_path: Optional[str],
-    clarity_threshold: float,
-    content_threshold: float,
-    max_error_rate: float,
-    output_json: str,
-) -> Mapping[str, object]:
-    suite_path = Path("data/test_suites") / f"{test_suite}.json"
+def main() -> None:
+    args = parse_args()
+    suite_path = Path("data/test_suites") / f"{args.test_suite}.json"
     suite = load_json(suite_path)
     cases = suite.get("cases", [])
-    if outputs_path:
-        outputs = load_json(Path(outputs_path))
+    if args.outputs:
+        outputs = load_json(Path(args.outputs))
     else:
-        sample_path = Path("data/sample_outputs") / f"{test_suite}.json"
+        sample_path = Path("data/sample_outputs") / f"{args.test_suite}.json"
         outputs = load_json(sample_path)
 
     results = evaluate_cases(
         cases=cases,
         outputs=outputs,
-        clarity_threshold=clarity_threshold,
-        content_threshold=content_threshold,
+        clarity_threshold=args.clarity_threshold,
+        content_threshold=args.content_threshold,
     )
-    summary = build_summary(results, max_error_rate)
+    summary = build_summary(results, args.max_error_rate)
 
     report = {
-        "model": model,
-        "suite": test_suite,
+        "model": args.model,
+        "suite": args.test_suite,
         "summary": summary,
         "cases": [
             {
@@ -216,25 +209,11 @@ def run_exam(
         ],
     }
 
-    output_path = Path(output_json)
+    output_path = Path(args.output_json)
     with output_path.open("w", encoding="utf-8") as handle:
         json.dump(report, handle, ensure_ascii=False, indent=2)
 
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
-    return report
-
-
-def main() -> None:
-    args = parse_args()
-    run_exam(
-        model=args.model,
-        test_suite=args.test_suite,
-        outputs_path=args.outputs,
-        clarity_threshold=args.clarity_threshold,
-        content_threshold=args.content_threshold,
-        max_error_rate=args.max_error_rate,
-        output_json=args.output_json,
-    )
 
 
 if __name__ == "__main__":

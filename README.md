@@ -77,11 +77,8 @@ python somp_exam.py \
 .
 ├── data/
 │   ├── sample_outputs/   # 示例输出（可替换为你的模型输出）
-│   ├── pipelines/         # 端到端流水线配置
 │   └── test_suites/       # 语言考试套件
 ├── somp_exam.py           # 语言考试 CLI（本地评测）
-├── somp_project.py        # 项目流水线入口
-├── somp_schema.py         # SOMP 通用层 schema 辅助
 ├── Exam-Rule.jpg
 ├── Runtime.jpg
 └── README.md
@@ -97,14 +94,6 @@ Auto-Welder 将原始输出规范化为 `JSON{Universal + Specific}`：
 python somp_welder.py \
   --input data/sample_outputs/somp_welder_input.json \
   --output somp_welded.json
-```
-
----
-
-### 运行完整项目流水线 (Pipeline)
-
-```bash
-python somp_project.py --pipeline data/pipelines/sample_pipeline.json
 ```
 
 ## ✅ 语言考试：语义清晰度与一致性
