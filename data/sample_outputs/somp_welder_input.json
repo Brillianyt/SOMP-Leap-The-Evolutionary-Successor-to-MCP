@@ -1,0 +1,12 @@
+{
+  "universal": {
+    "intent": "daily_outfit",
+    "summary": "根据今日运势推荐穿搭风格。",
+    "confidence": 0.91
+  },
+  "specific": {
+    "lucky_color": "green",
+    "style": "smart casual",
+    "sku": ["JKT-1023", "SHO-7781"]
+  }
+}
