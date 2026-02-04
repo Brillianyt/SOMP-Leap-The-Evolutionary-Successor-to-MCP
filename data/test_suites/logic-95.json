@@ -1,0 +1,22 @@
+{
+  "name": "logic-95",
+  "description": "基础语义清晰度与一致性测试（MVP 版）",
+  "pass_rate": 0.95,
+  "cases": [
+    {
+      "id": "clarity-01",
+      "prompt": "请用一句话表达你的观点：高数很难。",
+      "expected": "高数很难，因为它抽象且需要严格的逻辑推理。"
+    },
+    {
+      "id": "clarity-02",
+      "prompt": "解释为什么拖拽式 Agent 协作能提高效率。",
+      "expected": "拖拽式协作降低了组合成本，让用户能快速验证多 Agent 的协同产出。"
+    },
+    {
+      "id": "clarity-03",
+      "prompt": "用简短语言说明 SOMP 的准入考试目的。",
+      "expected": "准入考试用于筛掉表达不清晰或输出漂移的模型，保证生态对齐。"
+    }
+  ]
+}

@@ -59,3 +59,115 @@ SOMP 采用 `JSON{Universal + Specific}` 结构，兼顾生态的“广度”与
 ```bash
 
 python somp_exam.py --model "deepseek-v3" --test-suite "logic-95"
+```
+
+默认会读取 `data/sample_outputs/logic-95.json` 作为示例输出，并生成 `somp_exam_report.json`。你也可以提供自己的输出文件：
+
+```bash
+python somp_exam.py \
+  --model "your-model" \
+  --test-suite "logic-95" \
+  --outputs data/sample_outputs/logic-95.json \
+  --output-json somp_exam_report.json
+```
+
+### 项目结构 (MVP)
+
+```
+.
+├── data/
+│   ├── sample_outputs/   # 示例输出（可替换为你的模型输出）
+│   └── test_suites/       # 语言考试套件
+├── somp_exam.py           # 语言考试 CLI（本地评测）
+├── Exam-Rule.jpg
+├── Runtime.jpg
+└── README.md
+```
+
+---
+
+### 运行自动化协议“焊工” (Auto-Welder)
+
+Auto-Welder 将原始输出规范化为 `JSON{Universal + Specific}`：
+
+```bash
+python somp_welder.py \
+  --input data/sample_outputs/somp_welder_input.json \
+  --output somp_welded.json
+```
+
+## ✅ 语言考试：语义清晰度与一致性
+
+SOMP 的准入核心不是“调用”而是“表达”。我们提供一套语言考试，验证模型的表达是否清晰、可复述、可协作：
+
+1. **转述一致性测试**  
+   将待测 Agent 的输出交给一个中立转述器（如 Kimi）进行转述，如果转述内容与原始输出高度一致，则认定**表达清晰**。
+2. **5% 错误率淘汰线**  
+   若在长上下文中连续测试无法将错误率控制在 5% 以下，模型无资格进入生态。
+3. **周期性复检**  
+   通过后仍需周期性“年检”，防止能力退化或表达漂移。
+
+---
+
+## 🧩 语义最小充分性：Agent 之间的协议拟合
+
+在 SOMP 中，模型之间必须满足**信息的充分性与必要性**。为此我们引入“自动化 Agent 焊工”：
+
+- **最小必要信息拟合**：只保留接收端所需的关键字段，避免信息噪声。
+- **协议自动适配**：将原始输出实时重塑为 SOMP 标准语法，保证两端对齐。
+
+这使得不同模型像“共享语言的脑袋”一样互相理解。
+
+---
+
+## 🧱 双层语义 JSON：Universal + Specific
+
+SOMP 采用 `JSON{Universal + Specific}` 结构，兼顾生态扩展与领域对齐：
+
+- **Universal (通用表达层)**：用于监督、显示、跨域对齐。
+- **Specific (特定表达层)**：用于专业领域信息交换（如玄学参数、穿搭 SKU）。
+
+示意：
+
+```json
+{
+  "universal": {
+    "intent": "daily_outfit",
+    "confidence": 0.93,
+    "summary": "根据今日运势推荐穿搭风格。"
+  },
+  "specific": {
+    "lucky_color": "green",
+    "style": "smart casual",
+    "sku": ["JKT-1023", "SHO-7781"]
+  }
+}
+```
+
+---
+
+## 🧭 Agent 统一大市场 (MVP 设想)
+
+这是一个**无入侵、弱支付**的最小可行市场：
+
+1. **拖拽式编排**：用户从列表拖出 ChatGPT、DeepSeek、Gemini 或私有模型。
+2. **实时协作画布**：拉线即运行，连线中集成 SOMP 质检站。
+3. **协同展示**：如“算命 Agent → 穿搭 Agent”的实时链路，用户看到数据脉冲流转。
+
+### 搜索与展示
+
+- 搜索：“请你表达一个观点（如：高数很难）”。  
+- 相关 Agent 主动自我介绍，并播放演示短视频。  
+- 如果联动更强，会提示“我还可以搭配某 Agent 获得更完整效果”。
+
+### 数字橱窗
+
+平台提供“数字橱窗”式展示：  
+商家的短视频不是点击播放，而是**悬停即启动的全息演示**，让用户像走进橱窗一样体验 Agent 的能力。
+
+---
+
+## 🧪 草图 & 概念示意
+
+![SOMP 语言考试与准入草图](Exam-Rule.jpg)
+![SOMP 运行与协议拟合草图](Runtime.jpg)
