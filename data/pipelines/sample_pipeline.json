@@ -1,0 +1,13 @@
+{
+  "exam": {
+    "model": "deepseek-v3",
+    "test_suite": "logic-95",
+    "outputs": "data/sample_outputs/logic-95.json",
+    "output_json": "somp_exam_report.json"
+  },
+  "welder": {
+    "input": "data/sample_outputs/somp_welder_input.json",
+    "output": "somp_welded.json",
+    "strict": false
+  }
+}
